@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "Daily — AI Voice Journal",
+    "slug": "daily-voice-journal",
+    "version": "1.0.0",
+    "scheme": "dailyjournal",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f172a"
+    },
+    "ios": {
+      "bundleIdentifier": "com.dailyjournal.app",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Daily uses your microphone to record voice journal entries that get transcribed into text.",
+        "NSUserNotificationsUsageDescription": "Daily can send you a gentle daily reminder to journal."
+      }
+    },
+    "android": {
+      "package": "com.dailyjournal.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#1a2438",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": ["RECORD_AUDIO", "POST_NOTIFICATIONS"],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Daily uses your microphone to record voice journal entries."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/android-icon-foreground.png",
+          "color": "#2563eb"
+        }
+      ]
+    ],
+    "extra": {
+      "apiBaseUrl": "https://api.example.com",
+      "revenueCatApiKeyIos": "appl_REPLACE_ME",
+      "revenueCatApiKeyAndroid": "goog_REPLACE_ME"
+    }
+  }
+}
