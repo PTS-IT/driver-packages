@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Daily — Everyday Essentials</title>
+<meta name="description" content="Clock, weather, calculator, flashlight, timer, unit converter and notes in one fast offline app." />
+<meta name="theme-color" content="#2563eb" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icons/icon-192.png" type="image/png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Daily" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<main id="app">
+
+  <!-- HOME -->
+  <section class="screen active" id="screen-home" data-screen="home">
+    <div class="home-hero">
+      <p class="greeting" id="greeting">Hello</p>
+      <h1 class="clock" id="clock">--:--</h1>
+      <p class="date" id="date">—</p>
+    </div>
+    <div class="quick-grid">
+      <button class="quick-card" data-goto="weather">
+        <span class="quick-icon" id="quick-weather-icon">🌤️</span>
+        <span class="quick-label" id="quick-weather-text">Weather</span>
+      </button>
+      <button class="quick-card" data-goto="tools" data-tool="flashlight">
+        <span class="quick-icon">🔦</span>
+        <span class="quick-label">Flashlight</span>
+      </button>
+      <button class="quick-card" data-goto="tools" data-tool="calculator">
+        <span class="quick-icon">🧮</span>
+        <span class="quick-label">Calculator</span>
+      </button>
+      <button class="quick-card" data-goto="tools" data-tool="timer">
+        <span class="quick-icon">⏱️</span>
+        <span class="quick-label">Timer</span>
+      </button>
+      <button class="quick-card" data-goto="tools" data-tool="converter">
+        <span class="quick-icon">📐</span>
+        <span class="quick-label">Convert</span>
+      </button>
+      <button class="quick-card" data-goto="notes">
+        <span class="quick-icon">📝</span>
+        <span class="quick-label">Notes</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- WEATHER -->
+  <section class="screen" id="screen-weather" data-screen="weather">
+    <header class="screen-header"><h2>Weather</h2></header>
+    <div class="search-row">
+      <input type="text" id="city-input" placeholder="Search city…" autocomplete="off" />
+      <button id="city-search-btn" class="btn-icon" aria-label="Search">🔍</button>
+      <button id="locate-btn" class="btn-icon" aria-label="Use my location">📍</button>
+    </div>
+    <div id="city-suggestions" class="suggestions hidden"></div>
+    <div id="weather-content" class="weather-content">
+      <p class="hint">Tap 📍 to use your location, or search a city.</p>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="screen" id="screen-tools" data-screen="tools">
+    <header class="screen-header"><h2>Tools</h2></header>
+    <div class="tool-tabs">
+      <button class="tool-tab active" data-tool-panel="flashlight">Flashlight</button>
+      <button class="tool-tab" data-tool-panel="calculator">Calculator</button>
+      <button class="tool-tab" data-tool-panel="timer">Timer</button>
+      <button class="tool-tab" data-tool-panel="converter">Convert</button>
+    </div>
+
+    <div class="tool-panel active" data-panel="flashlight">
+      <button id="flashlight-toggle" class="flash-btn">
+        <span id="flash-icon">🔦</span>
+        <span id="flash-label">Tap to turn on</span>
+      </button>
+      <p class="hint" id="flash-hint">Uses your camera's torch when available, otherwise lights up the screen.</p>
+    </div>
+
+    <div class="tool-panel" data-panel="calculator">
+      <div class="calc-display" id="calc-display">0</div>
+      <div class="calc-grid">
+        <button class="calc-btn calc-op" data-calc="clear">C</button>
+        <button class="calc-btn calc-op" data-calc="sign">±</button>
+        <button class="calc-btn calc-op" data-calc="percent">%</button>
+        <button class="calc-btn calc-op" data-calc="/">÷</button>
+
+        <button class="calc-btn" data-calc="7">7</button>
+        <button class="calc-btn" data-calc="8">8</button>
+        <button class="calc-btn" data-calc="9">9</button>
+        <button class="calc-btn calc-op" data-calc="*">×</button>
+
+        <button class="calc-btn" data-calc="4">4</button>
+        <button class="calc-btn" data-calc="5">5</button>
+        <button class="calc-btn" data-calc="6">6</button>
+        <button class="calc-btn calc-op" data-calc="-">−</button>
+
+        <button class="calc-btn" data-calc="1">1</button>
+        <button class="calc-btn" data-calc="2">2</button>
+        <button class="calc-btn" data-calc="3">3</button>
+        <button class="calc-btn calc-op" data-calc="+">+</button>
+
+        <button class="calc-btn calc-zero" data-calc="0">0</button>
+        <button class="calc-btn" data-calc=".">.</button>
+        <button class="calc-btn calc-eq" data-calc="=">=</button>
+      </div>
+    </div>
+
+    <div class="tool-panel" data-panel="timer">
+      <div class="timer-tabs">
+        <button class="timer-tab active" data-timer-mode="stopwatch">Stopwatch</button>
+        <button class="timer-tab" data-timer-mode="countdown">Timer</button>
+      </div>
+      <div class="timer-mode-panel active" data-timer-panel="stopwatch">
+        <div class="stopwatch-display" id="stopwatch-display">00:00.00</div>
+        <div class="timer-controls">
+          <button id="stopwatch-start" class="btn-primary">Start</button>
+          <button id="stopwatch-lap" class="btn-secondary" disabled>Lap</button>
+          <button id="stopwatch-reset" class="btn-secondary">Reset</button>
+        </div>
+        <ul id="lap-list" class="lap-list"></ul>
+      </div>
+      <div class="timer-mode-panel" data-timer-panel="countdown">
+        <div class="countdown-inputs">
+          <input type="number" id="cd-min" min="0" max="180" value="5" /> <span>min</span>
+          <input type="number" id="cd-sec" min="0" max="59" value="0" /> <span>sec</span>
+        </div>
+        <div class="stopwatch-display" id="countdown-display">05:00</div>
+        <div class="timer-controls">
+          <button id="countdown-start" class="btn-primary">Start</button>
+          <button id="countdown-reset" class="btn-secondary">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-panel" data-panel="converter">
+      <div class="converter-category">
+        <select id="conv-category">
+          <option value="length">Length</option>
+          <option value="weight">Weight</option>
+          <option value="temperature">Temperature</option>
+          <option value="currency">Currency (approx.)</option>
+        </select>
+      </div>
+      <div class="converter-row">
+        <input type="number" id="conv-input" value="1" />
+        <select id="conv-from"></select>
+      </div>
+      <div class="converter-swap">
+        <button id="conv-swap" class="btn-icon" aria-label="Swap">⇅</button>
+      </div>
+      <div class="converter-row">
+        <input type="number" id="conv-output" readonly />
+        <select id="conv-to"></select>
+      </div>
+      <p class="hint" id="conv-hint"></p>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section class="screen" id="screen-notes" data-screen="notes">
+    <header class="screen-header"><h2>Notes</h2></header>
+    <form id="note-form" class="note-form">
+      <input type="text" id="note-input" placeholder="Write a quick note…" autocomplete="off" />
+      <button type="submit" class="btn-primary">Add</button>
+    </form>
+    <ul id="note-list" class="note-list"></ul>
+    <p class="hint" id="notes-empty-hint">No notes yet — jot something down above.</p>
+  </section>
+
+</main>
+
+<nav class="tabbar" id="tabbar">
+  <button class="tab-btn active" data-nav="home"><span class="tab-icon">🏠</span><span>Home</span></button>
+  <button class="tab-btn" data-nav="weather"><span class="tab-icon">🌤️</span><span>Weather</span></button>
+  <button class="tab-btn" data-nav="tools"><span class="tab-icon">🧰</span><span>Tools</span></button>
+  <button class="tab-btn" data-nav="notes"><span class="tab-icon">📝</span><span>Notes</span></button>
+</nav>
+
+<script src="js/app.js"></script>
+</body>
+</html>
